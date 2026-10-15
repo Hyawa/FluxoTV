@@ -1,0 +1,10 @@
+{
+  "appId": "com.example.app",
+  "appName": "IPTV",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}

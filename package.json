@@ -1,0 +1,43 @@
+{
+  "name": "iptv-tvbox",
+  "version": "1.0.0",
+  "description": "App IPTV para TV Box Android (Vite + React + TS + shadcn/ui + backend Node/TS embarcado)",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build:server": "node server/build.mjs",
+    "build:web": "vite build",
+    "build": "npm run build:server && npm run build:web",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "preview": "vite preview",
+    "sync": "npm run build && cap sync android",
+    "android": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capawesome/capacitor-nodejs": "^0.2.0",
+    "@radix-ui/react-slot": "^1.5.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "hls.js": "^1.7.3",
+    "lucide-react": "^0.468.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^6.1.2",
+    "esbuild": "^0.28.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.7.2",
+    "vite": "^8.3.4"
+  }
+}
