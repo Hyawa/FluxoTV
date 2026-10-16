@@ -127,17 +127,20 @@ chave**, senão o Android recusa instalar por cima (erro de assinatura). Guarde-
 
 - Arquivo: `android/app/iptv-release.keystore`
 - Alias: `iptv`
-- Senha (store e key): `R4U63rRWA5qO7HKuxDMQQbEAh9ND`
+- Senha (store e key): guardada apenas em `android/app/keystore.properties` (fora do Git)
 - Validade: 10.000 dias
 
 Credenciais em `android/app/keystore.properties` (já fora do Git):
 
 ```properties
 storeFile=iptv-release.keystore
-storePassword=R4U63rRWA5qO7HKuxDMQQbEAh9ND
+storePassword=<sua-senha>
 keyAlias=iptv
-keyPassword=R4U63rRWA5qO7HKuxDMQQbEAh9ND
+keyPassword=<sua-senha>
 ```
+
+> **Nunca** comite a senha da keystore no Git. Ela deve existir apenas neste arquivo local
+> (que já está no `.gitignore`).
 
 > **Backup obrigatório:** copie `android/app/iptv-release.keystore` e o `keystore.properties`
 > para um pendrive / nuvem privada. Sem isso, você não consegue mais atualizar o app instalado
@@ -420,6 +423,28 @@ novo, sem Obtainium.
 
 - Android 8+: autorize o app que está abrindo o APK (WhatsApp, Drive, Arquivos) ou o próprio
   Obtainium em **Configurações → Apps → Acesso especial → Instalar apps desconhecidos**.
+
+### 11.8 App abre em branco ou sem estilo (CSS) em TV Box / projetor Android
+
+Sintomas típicos em aparelhos baratos com **Android 11** e **WebView desatualizado**:
+
+- **Tela preta / não abre**: o WebView é antigo demais para executar a sintaxe moderna do
+  JavaScript. O build já transpila o código para ES2015 (`build.target` no `vite.config.ts`).
+- **Abre, mas fica tudo sem estilo/feio**: o WebView antigo não conhece os `@layer` do
+  Tailwind v4 e descarta o CSS inteiro. O `vite.config.ts` já "achata" essas camadas depois do
+  build (plugin `iptv-legacy-css`).
+
+Se mesmo com uma versão nova do app o problema continuar, o WebView daquele aparelho está
+**muito antigo, quebrado ou ausente**. Verifique/atualize:
+
+1. No aparelho: **Configurações → Apps → Android System WebView** (ou "WebView da Samsung",
+   "Chrome") e veja a versão. O ideal é **Chrome/WebView 100 ou superior**.
+2. Sem Play Store (comum em TV Box): baixe o APK mais recente do **Android System WebView** ou
+   **Chrome** em <https://www.apkmirror.com> e instale manualmente.
+3. Reinicie o aparelho depois de atualizar o WebView e abra o app de novo.
+
+> Dica: para confirmar a versão do WebView, acesse no navegador do aparelho o site
+> <https://www.whatismybrowser.com> ou rode `adb shell dumpsys webviewupdate`.
 
 ---
 
