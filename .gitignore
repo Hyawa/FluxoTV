@@ -1,19 +1,50 @@
-.idea/
+# --- Dependencias / build ---
 node_modules/
-.vscode/
-*.map
-.DS_Store
-.sourcemaps
 dist/
 public/nodejs/
 android/app/build/
 android/.gradle/
 android/build/
+
+# Config gerada automaticamente (nao versionar)
 android/local.properties
 android/app/src/main/assets/public/
 android/app/src/main/assets/capacitor.config.json
 android/app/src/main/res/xml/config.xml
+
+# --- Editores / SO ---
+.idea/
+.vscode/
+*.map
+.sourcemaps
+.DS_Store
+
+# ============================================================
+#  SEGREDOS E CREDENCIAIS — NUNCA subir para o Git
+# ============================================================
+
+# Arquivos de variaveis de ambiente
+.env
+.env.*
+.env.local
+.env.*.local
+!.env.example
+
+# Chaves de assinatura / certificados
 *.keystore
 *.jks
+*.p12
+*.p8
+*.pem
+*.key
+*.mobileprovision
+*.b64
+
+# Propriedades com senhas
 keystore.properties
-android/app/keystore.properties
+**/keystore.properties
+keystore.b64
+
+# Credenciais de servicos (Firebase etc.)
+google-services.json
+**/google-services.json
